@@ -4,6 +4,9 @@ module.exports = {
   /*
   ** Headers of the page
   */
+  env: {
+    APP_ID: process.env.APP_ID || 'http://localhost:3000'
+  },
   head: {
     title: process.env.npm_package_name || '',
     meta: [
@@ -32,6 +35,7 @@ module.exports = {
   ** Plugins to load before mounting the App
   */
   plugins: [
+    { src: '~/plugins/parse', mode: 'client' }
   ],
   /*
   ** Nuxt.js dev-modules

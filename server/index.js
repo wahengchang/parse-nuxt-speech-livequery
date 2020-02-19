@@ -14,6 +14,15 @@ async function start () {
   const { host, port } = nuxt.options.server
   app.use('/sitemap.xml', require('./apis/sitemap'))
 
+  // -=-=-=-=-=-=-=- parse init
+  const {default: ParseServer} = require('parse-server');
+  Parse.initialize(process.env.APP_ID,null,process.env.MASTER_KEY);
+  const parseServer = new ParseServer({ ...require('./configs/server') });
+  const parseServerApi = parseServer.app;
+  app.use('/parse', parseServerApi); //  <-- Moved here
+  require('./configs/livequery').init(app)
+  // -=-=-=-=-=-=-=- parse init
+
   await nuxt.ready()
   // Build only in dev mode
   if (config.dev) {
