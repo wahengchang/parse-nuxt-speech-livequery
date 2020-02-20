@@ -13,7 +13,8 @@ export default {
       type: String,
       default: 'en-US'
     },
-    onTranscriptionEnd: Function
+    onTranscriptionEnd: Function,
+    onRuntimeEnd: Function
   },
 
   computed: {
@@ -31,6 +32,8 @@ export default {
 
   methods: {
     checkApi () {
+      const {onRuntimeEnd} = this
+      console.log(' -=-=-=-onRuntimeEnd: ', onRuntimeEnd)
       try {
         window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
         const {SpeechRecognition} = window
@@ -44,7 +47,7 @@ export default {
         this.innerRecog = recognition
 
         recognition.lang = this.lang
-        recognition.interimResults = true
+        // recognition.interimResults = true
         recognition.continuous = true
 
         recognition.addEventListener('start', event => {
@@ -60,9 +63,18 @@ export default {
             .join('')
 
           this.runtimeTranscription = text
+          this.$emit('onRuntimeEnd', {
+            runtimeText: text
+          })
+          if(onRuntimeEnd) {
+            this.onRuntimeEnd({
+              runtimeText: text
+            })
+          }
         })
 
         recognition.addEventListener('end', () => {
+          console.log(' -=-=- end')
           if (this.runtimeTranscription !== '') {
             this.transcription.push(this.runtimeTranscription)
 
@@ -70,10 +82,12 @@ export default {
               transcription: this.transcription,
               lastSentence: this.runtimeTranscription
             })
-            this.onTranscriptionEnd({
-              transcription: this.transcription,
-              lastSentence: this.runtimeTranscription
-            })
+            if(this.onTranscriptionEnd) {
+              this.onTranscriptionEnd({
+                transcription: this.transcription,
+                lastSentence: this.runtimeTranscription
+              })
+            }
           }
           this.runtimeTranscription = ''
         })

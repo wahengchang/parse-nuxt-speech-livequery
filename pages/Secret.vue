@@ -3,9 +3,7 @@
     <!-- Header -->
 
     <header id="header" :style='{"background-color": "#225473"}'>
-
       <a class="logo" href="/">Speech To Text Online</a>
-
     </header>
 
     <section class="wrapper" id="main">

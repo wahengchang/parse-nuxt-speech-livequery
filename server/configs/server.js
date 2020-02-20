@@ -12,7 +12,7 @@ module.exports = {
     mountPlayground: true,
     publicServerURL: `http://${HOST_URL}:${port}/parse`,
     liveQuery: {
-      classNames: ['Chatrooms'] // List of classes to support for query subscriptions
+      classNames: ['Messages'] // List of classes to support for query subscriptions
     },
     verbose: process.env.VERBOSE_KEY || false,
     "filesAdapter": {

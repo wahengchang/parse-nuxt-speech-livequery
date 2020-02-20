@@ -1,11 +1,20 @@
 
+const port = process.env.PORT || 8080
+const SERVER_HOST = process.env.SERVER_HOST || '127.0.0.1'
+
 module.exports = {
   mode: 'universal',
+  server: {
+    port,
+    host: SERVER_HOST
+  },
   /*
   ** Headers of the page
   */
   env: {
-    APP_ID: process.env.APP_ID || 'http://localhost:3000'
+    APP_ID: process.env.APP_ID || `http://localhost:${port}`,
+    PORT_LIVE_QUERY: process.env.PORT_LIVE_QUERY || 2337,
+    HOST_URL: process.env.HOST_URL || 'localhost',
   },
   head: {
     title: process.env.npm_package_name || '',

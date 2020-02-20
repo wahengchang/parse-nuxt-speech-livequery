@@ -3,7 +3,7 @@
     
 		<!-- Header -->
 			<header id="header" :style='{"background-color": "#225473"}'>
-				<a class="logo" href="/">Speech To Text Online</a>
+				<a class="logo" href="/login">Speech To Text Online</a>
 			</header>
 
 		<!-- Banner -->
@@ -15,8 +15,8 @@
             <p>69 Languages are supported.</p>
             <a
               class="button"
-              :href="`/translate/${defaultLangObj.value}`"
-            > {{defaultLangObj.display}} </a>
+              :href="`/login`"
+            > Login </a>
 				  </div>
 				</div>
 			</section>

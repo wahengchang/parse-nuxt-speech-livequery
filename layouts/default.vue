@@ -1,6 +1,11 @@
 <template>
-  <div>
+  <div class="container">
+    <!-- Header -->
+			<header id="header" :style='{"background-color": "#225473"}'>
+      <a class="logo" href="/">Speech To Text Online</a>
+    </header>
     <nuxt />
+    <Footer />
   </div>
 </template>
 
